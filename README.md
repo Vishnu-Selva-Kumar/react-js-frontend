@@ -70,41 +70,6 @@ All commands must be executed through the running Docker service (`web`):
 
 ---
 
-## 📁 Project Structure
-
-```text
-react-js-frontend/
-├── .agents/
-│   └── rules/                  # Development & AI pair-programming guidelines
-│       ├── implementation-plan-and-walkthrough.md
-│       ├── react-docker.md
-│       ├── react-components.md
-│       ├── git-commit.md
-│       └── commit_type.yml
-├── .docs/
-│   └── cli-documents.md        # Comprehensive Docker CLI reference guide
-├── public/                     # Static assets served as-is (favicons, SVGs)
-├── src/
-│   ├── assets/                 # Processed images and SVGs
-│   ├── components/             # Reusable UI components
-│   ├── hooks/                  # Custom React hooks
-│   ├── App.css                 # Application layout styles
-│   ├── App.jsx                 # Main application view
-│   ├── index.css               # Global styles, variables, and CSS reset
-│   └── main.jsx                # Application DOM entry point
-├── .dockerignore               # Files excluded from Docker context
-├── .env.example                # Example environment variables
-├── .gitignore                  # Git-ignored files and patterns
-├── .oxlintrc.json              # Oxlint linting configuration
-├── Dockerfile                  # Node 22 Alpine development container
-├── docker-compose.yml          # Container service definition & port mapping
-├── index.html                  # HTML entry template
-├── package.json                # Project dependencies and npm scripts
-└── vite.config.js              # Vite configuration and React plugin setup
-```
-
----
-
 ## 🔍 Code Quality & Standards
 
 - **Linting**: Run `docker compose exec web npm run lint` before committing to ensure adherence to React 19 hook rules and code hygiene.
