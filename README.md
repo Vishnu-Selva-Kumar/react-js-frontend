@@ -1,16 +1,118 @@
-# React + Vite
+# React 19 Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, containerized frontend web application built with **React 19**, **Vite 8**, and **Oxlint**, fully orchestrated with **Docker Compose**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
 
-## React Compiler
+- **Framework**: [React 19](https://react.dev/) (`react`, `react-dom`)
+- **Build Tool & Dev Server**: [Vite 8](https://vitejs.dev/) with [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)
+- **Linter**: [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) (high-performance Rust-based JavaScript/React linter)
+- **Containerization**: [Docker](https://www.docker.com/) & Docker Compose (`node:22-alpine`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🚀 Quick Start (Docker)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+All development and build processes are containerized. You do not need Node.js installed on your host machine—only **Docker** and **Docker Compose**.
+
+### 1. Clone & Setup Environment
+
+```bash
+# Clone the repository
+git clone git@github-personal:Vishnu-Selva-Kumar/react-js-frontend.git
+cd react-js-frontend
+
+# Copy environment variables
+cp .env.example .env
+```
+
+### 2. Start Development Server
+
+```bash
+docker compose up -d
+```
+
+The application will be available at:
+👉 **[http://localhost:5173](http://localhost:5173)**
+
+Hot Module Replacement (HMR) is enabled with polling support (`CHOKIDAR_USEPOLLING=true`) for seamless cross-platform live reload.
+
+### 3. Stop Containers
+
+```bash
+# Stop containers
+docker compose stop
+
+# Stop and remove containers and network
+docker compose down
+```
+
+---
+
+## 💻 CLI Commands Reference
+
+All commands must be executed through the running Docker service (`web`):
+
+| Action | Command |
+| :--- | :--- |
+| **Start Dev Server (Detached)** | `docker compose up -d` |
+| **View Live Logs** | `docker compose logs -f web` |
+| **Run Linter (Oxlint)** | `docker compose exec web npm run lint` |
+| **Production Build** | `docker compose exec web npm run build` |
+| **Install New Package** | `docker compose exec web npm install <package-name>` |
+| **Install Dev Dependency** | `docker compose exec web npm install <package-name> --save-dev` |
+| **Open Container Shell** | `docker compose exec web sh` |
+| **Rebuild Docker Image** | `docker compose build` |
+
+> For additional Docker CLI reference and standalone run commands, see [`.docs/cli-documents.md`](.docs/cli-documents.md).
+
+---
+
+## 📁 Project Structure
+
+```text
+react-js-frontend/
+├── .agents/
+│   └── rules/                  # Development & AI pair-programming guidelines
+│       ├── implementation-plan-and-walkthrough.md
+│       ├── react-docker.md
+│       ├── react-components.md
+│       ├── git-commit.md
+│       └── commit_type.yml
+├── .docs/
+│   └── cli-documents.md        # Comprehensive Docker CLI reference guide
+├── public/                     # Static assets served as-is (favicons, SVGs)
+├── src/
+│   ├── assets/                 # Processed images and SVGs
+│   ├── components/             # Reusable UI components
+│   ├── hooks/                  # Custom React hooks
+│   ├── App.css                 # Application layout styles
+│   ├── App.jsx                 # Main application view
+│   ├── index.css               # Global styles, variables, and CSS reset
+│   └── main.jsx                # Application DOM entry point
+├── .dockerignore               # Files excluded from Docker context
+├── .env.example                # Example environment variables
+├── .gitignore                  # Git-ignored files and patterns
+├── .oxlintrc.json              # Oxlint linting configuration
+├── Dockerfile                  # Node 22 Alpine development container
+├── docker-compose.yml          # Container service definition & port mapping
+├── index.html                  # HTML entry template
+├── package.json                # Project dependencies and npm scripts
+└── vite.config.js              # Vite configuration and React plugin setup
+```
+
+---
+
+## 🔍 Code Quality & Standards
+
+- **Linting**: Run `docker compose exec web npm run lint` before committing to ensure adherence to React 19 hook rules and code hygiene.
+- **Component Architecture**: Keep presentation clean; extract business logic, data fetching, and state into custom hooks in `src/hooks/`.
+- **Git Commits**: All commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) format (`<type>(<scope>): <description>`). See [`.agents/rules/git-commit.md`](.agents/rules/git-commit.md) for allowed types and scopes.
+
+---
+
+## 📄 License
+
+This project is private and proprietary.
